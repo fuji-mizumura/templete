@@ -9,6 +9,10 @@ services:
             - 80:80
         networks:
             - shared-net
+        volumes:
+            -type: bind
+            source: ./server/httpd.conf
+            target: /usr/local/apache2/conf/httpd.conf
 
 networks:
     shared-net:

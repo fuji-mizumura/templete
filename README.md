@@ -13,4 +13,6 @@
     1. docker-compose.yml, コンテナ用ディレクトリ, Dockerfile を作成
     2. `docker compose up -d`
     3. `docker compose cp server:/usr/local/apache2/conf/httpd.conf ./server`コンテナ内のhttpd.confをホストのserverディレクトリにコピー
-    4. 
+    4. httpd.confをマウントさせるようdocker-compose.ymlにvolumesの記述を追加
+4. 「front」コンテナの作成
+   1. 

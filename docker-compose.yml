@@ -10,9 +10,23 @@ services:
         networks:
             - shared-net
         volumes:
-            -type: bind
-            source: ./server/httpd.conf
-            target: /usr/local/apache2/conf/httpd.conf
+            - type: bind
+              source: ./server/httpd.conf
+              target: /usr/local/apache2/conf/httpd.conf
+    front:
+        build:
+            context: ./front
+        container_name: front
+        ports:
+            - 3000:3000
+        networks:
+            - shared-net
+        volumes:
+            - type: bind
+              source: ./front/app
+              target: /usr/src/app
+        tty: true
+        stdin_open: true
 
 networks:
     shared-net:

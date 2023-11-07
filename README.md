@@ -7,7 +7,10 @@
     4. GitHub でリモートリポジトリの作成
     5. `git remote add origin https://github.com/fuji-mizumura/templete.git`
     6. `git push -u origin main`
-2. `docker network create shared-net`ネットワークを作成
+2. ネットワークを作成
+   1. `docker network create shared-net`
 3. 「server」コンテナの作成
     1. docker-compose.yml, コンテナ用ディレクトリ, Dockerfile を作成
-    2. 
+    2. `docker compose up -d`
+    3. `docker compose cp server:/usr/local/apache2/conf/httpd.conf ./server`コンテナ内のhttpd.confをホストのserverディレクトリにコピー
+    4. 

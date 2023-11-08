@@ -14,13 +14,21 @@
     2. `docker compose up -d`
     3. `docker compose cp server:/usr/local/apache2/conf/httpd.conf ./server`コンテナ内の httpd.conf をホストの server ディレクトリにコピー
     4. httpd.conf をマウントさせるよう docker-compose.yml に volumes の記述を追加
+    5. localhost（ポート指定なし）で動作を確認
 4.  「front」コンテナの作成
     1. docker-compose.yml に追記, コンテナ用ディレクトリ, Dockerfile を作成
     2. `docker compose up -d`
     3. `docker compose exec front ash`
     4. `npm install next@latest react@latest react-dom@latest`
     5. .gitignore を作成、package.json に scripts を追記、app/page.tsx、app/layout.tsx を作成
-    6. 
+    6. `npm run dev`で起動し、localhost:3000でのレスポンスを確認
+    7. Dockerfileに`CMD [ "npm","run","dev" ]`を追記
+5. 「api」コンテナの作成
+   1. docker-compose.yml に追記, コンテナ用ディレクトリ, Dockerfile を作成
+   2. ※今回は前回のテストで使用したFlaskのapiディレクトリを丸ごとコピーした
+   3. localhost:5000でのレスポンスを確認
+6. 「db」コンテナの作成
+   1. docker-compose.yml に追記, コンテナ用ディレクトリ, Dockerfile を作成
 
 # 目標
 

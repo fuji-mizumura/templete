@@ -5,19 +5,26 @@ import psycopg2
 import psycopg2.extras
 
 
+
 app = Flask(__name__)
 CORS(app)
 
 
-# ルートにアクセスした際の処理
+
+
+# 接続テスト用のAPI
 @app.route('/')
-def hello():
-    return 'Hello World!'
+def index_api():
+    return json.dumps({
+        'message':'Hello World',
+    })
+
+
 
 
 # DBに接続して従業員リストをテンプレートを用いて表示
 @app.route('/db')
-def index():
+def db_view():
     try:
         # PostgreSQL Serverとの接続を定義し、接続を作成
         conn = psycopg2.connect(
@@ -49,9 +56,46 @@ def index():
     conn.close()
 
 
-# DBに接続して従業員リストを作成
+
+
+# DBに接続してパスに指定した従業員IDの情報を取得するAPI
+@app.route('/db/<int:employee_id>')
+def db_get_api(employee_id):
+    try:
+        # PostgreSQL Serverとの接続を定義し、接続を作成
+        conn = psycopg2.connect(
+            host='db',
+            port=5432,
+            database='postgres',
+            user='postgres',
+            password='postgres',
+        )
+        cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+
+        # SQLを投入して情報取得
+        cur.execute('select * from employee where employee_id = %s', (employee_id,))
+        employee_list = cur.fetchall()
+
+        return json.dumps({
+            'data':employee_list[0],
+        })
+
+    except psycopg2.errors:
+        return json.dumps({
+            'message':'error',
+        })
+        pass
+
+    # 接続終了
+    conn.close()
+
+
+
+
+
+# DBに接続して従業員リストを作成するAPI
 @app.route('/db/reset')
-def db_api():
+def db_reset_api():
     try:
         # PostgreSQL Serverとの接続を定義し、接続を作成
         conn = psycopg2.connect(
@@ -105,6 +149,8 @@ def db_api():
 
     # 接続終了
     conn.close()
+
+
 
 
 app.run()

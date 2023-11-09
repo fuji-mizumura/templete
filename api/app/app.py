@@ -1,3 +1,4 @@
+import os
 import json
 from flask import Flask, render_template
 from flask_cors import CORS
@@ -30,9 +31,9 @@ def db_view():
         conn = psycopg2.connect(
             host='db',
             port=5432,
-            database='postgres',
-            user='postgres',
-            password='postgres',
+            database=os.environ['POSTGRES_DB'],
+            user=os.environ['POSTGRES_USER'],
+            password=os.environ['POSTGRES_PASSWORD'],
         )
         cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
@@ -66,9 +67,9 @@ def db_get_api(employee_id):
         conn = psycopg2.connect(
             host='db',
             port=5432,
-            database='postgres',
-            user='postgres',
-            password='postgres',
+            database=os.environ['POSTGRES_DB'],
+            user=os.environ['POSTGRES_USER'],
+            password=os.environ['POSTGRES_PASSWORD'],
         )
         cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
@@ -101,9 +102,9 @@ def db_reset_api():
         conn = psycopg2.connect(
             host='db',
             port=5432,
-            database='postgres',
-            user='postgres',
-            password='postgres',
+            database=os.environ['POSTGRES_DB'],
+            user=os.environ['POSTGRES_USER'],
+            password=os.environ['POSTGRES_PASSWORD'],
         )
         cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 

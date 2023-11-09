@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+</head>
+
+<body>
+    <h2>社員一覧</h2>
+    <ul> {% for line in dataset %} <li>{{ line.employee_id }} : {{ line.employee_name }} : {{ line.employee_age }}</li>
+        {% endfor %} </ul>
+</body>
+</html>

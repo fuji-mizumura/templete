@@ -29,11 +29,11 @@ def db_view():
     try:
         # PostgreSQL Serverとの接続を定義し、接続を作成
         conn = psycopg2.connect(
-            host='db',
-            port=5432,
-            database=os.environ['POSTGRES_DB'],
-            user=os.environ['POSTGRES_USER'],
-            password=os.environ['POSTGRES_PASSWORD'],
+            host = os.environ['POSTGRES_HOST'],
+            port = os.environ['POSTGRES_PORT'],
+            database = os.environ['POSTGRES_DB'],
+            user = os.environ['POSTGRES_USER'],
+            password = os.environ['POSTGRES_PASSWORD'],
         )
         cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
@@ -65,11 +65,11 @@ def db_get_api(employee_id):
     try:
         # PostgreSQL Serverとの接続を定義し、接続を作成
         conn = psycopg2.connect(
-            host='db',
-            port=5432,
-            database=os.environ['POSTGRES_DB'],
-            user=os.environ['POSTGRES_USER'],
-            password=os.environ['POSTGRES_PASSWORD'],
+            host = os.environ['POSTGRES_HOST'],
+            port = os.environ['POSTGRES_PORT'],
+            database = os.environ['POSTGRES_DB'],
+            user = os.environ['POSTGRES_USER'],
+            password = os.environ['POSTGRES_PASSWORD'],
         )
         cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
@@ -100,11 +100,11 @@ def db_reset_api():
     try:
         # PostgreSQL Serverとの接続を定義し、接続を作成
         conn = psycopg2.connect(
-            host='db',
-            port=5432,
-            database=os.environ['POSTGRES_DB'],
-            user=os.environ['POSTGRES_USER'],
-            password=os.environ['POSTGRES_PASSWORD'],
+            host = os.environ['POSTGRES_HOST'],
+            port = os.environ['POSTGRES_PORT'],
+            database = os.environ['POSTGRES_DB'],
+            user = os.environ['POSTGRES_USER'],
+            password = os.environ['POSTGRES_PASSWORD'],
         )
         cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 

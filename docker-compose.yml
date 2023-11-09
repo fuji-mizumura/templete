@@ -39,6 +39,22 @@ services:
             - type: bind
               source: ./api/app
               target: /usr/src/app
+    db:
+        build:
+            context: ./db
+        container_name: db
+        ports:
+            - 5432:5432
+        networks:
+            - shared-net
+        volumes:
+            - type: bind
+              source: ./db/data
+              target: /var/lib/postgresql/data
+        environment:
+            - POSTGRES_PASSWORD=postgres
+            - POSTGRES_DB=postgres
+            - TZ=Asia/Tokyo
 
 networks:
     shared-net:

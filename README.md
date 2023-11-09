@@ -1,3 +1,14 @@
+# コンテナ構成
+
+-   **server:** Appache 公式イメージ(https://hub.docker.com/_/httpd)
+    -   理由：実装例が豊富で特に php とセットにすることが多いため
+-   **front:** Node.js 公式イメージに Next.js をインストール(https://hub.docker.com/_/node)
+    -   理由：純粋な react を触ったことがないので
+-   **api:** python 公式イメージに Flask をインストール(https://hub.docker.com/_/python)、
+    -   理由：php だとテスト用環境構築の際に Apache の設定が専用設定になってしまうため
+-   **db:** postgresql 公式イメージ(https://hub.docker.com/_/postgres)
+    -   理由：公式コンテナのなかで唯一 Alpine をリリースしていて、イメージサイズが半分ほどで済むため
+
 # 作成手順
 
 1.  Git 管理
@@ -21,14 +32,16 @@
     3. `docker compose exec front ash`
     4. `npm install next@latest react@latest react-dom@latest`
     5. .gitignore を作成、package.json に scripts を追記、app/page.tsx、app/layout.tsx を作成
-    6. `npm run dev`で起動し、localhost:3000でのレスポンスを確認
-    7. Dockerfileに`CMD [ "npm","run","dev" ]`を追記
-5. 「api」コンテナの作成
-   1. docker-compose.yml に追記, コンテナ用ディレクトリ, Dockerfile を作成
-   2. ※今回は前回のテストで使用したFlaskのapiディレクトリを丸ごとコピーした
-   3. localhost:5000でのレスポンスを確認
-6. 「db」コンテナの作成
-   1. docker-compose.yml に追記, コンテナ用ディレクトリ, Dockerfile を作成
+    6. `npm run dev`で起動し、localhost:3000 でのレスポンスを確認
+    7. Dockerfile に`CMD [ "npm","run","dev" ]`を追記
+5.  「api」コンテナの作成
+    1. docker-compose.yml に追記, コンテナ用ディレクトリ, Dockerfile を作成
+    2. ※今回は前回のテストで使用した Flask の api ディレクトリを丸ごとコピーした
+    3. localhost:5000 でのレスポンスを確認
+6.  「db」コンテナの作成
+    1. docker-compose.yml に追記, コンテナ用ディレクトリ, Dockerfile を作成
+    2. .gitignore の作成
+7. httpd.confに設定
 
 # 目標
 

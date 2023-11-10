@@ -13,6 +13,9 @@ services:
             - type: bind
               source: ./server/httpd.conf
               target: /usr/local/apache2/conf/httpd.conf
+        depends_on:
+            - front
+            - api
     front:
         build:
             context: ./front
@@ -26,7 +29,6 @@ services:
               source: ./front/app
               target: /usr/src/app
         tty: true
-        stdin_open: true
     api:
         build:
             context: ./api
@@ -39,6 +41,8 @@ services:
             - type: bind
               source: ./api/app
               target: /usr/src/app
+            - /etc/passwd:/etc/passwd:ro
+            - /etc/group:/etc/group:ro
         environment:
             - POSTGRES_HOST=db
             - POSTGRES_PORT=5432
@@ -46,6 +50,9 @@ services:
             - POSTGRES_PASSWORD=postgres
             - POSTGRES_DB=postgres
             - TZ=Asia/Tokyo
+        user: 1000:1000 # ホストのユーザーと同じに設定しなおすこと！
+        depends_on:
+            - db
     db:
         build:
             context: ./db
